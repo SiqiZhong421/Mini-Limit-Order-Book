@@ -1,0 +1,30 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Mini Order Book",
+            "type": "shell",
+            "command": "cl.exe",
+            "args": [
+                "/Zi",
+                "/EHsc",
+                "/nologo",
+                "/std:c++20",
+                "/I${workspaceFolder}\\include",
+                "${workspaceFolder}\\src\\main.cpp",
+                "${workspaceFolder}\\src\\order_book.cpp",
+                "/Fe:${workspaceFolder}\\order_book.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

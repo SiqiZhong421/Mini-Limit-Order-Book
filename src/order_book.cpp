@@ -234,3 +234,40 @@ bool OrderBook::cancel_order(int order_id){
 
     return false;
 }
+
+const std::vector<Trade>& OrderBook::trades() const {
+    return trades_;
+}
+
+std::optional<double> OrderBook::best_bid() const{
+    if (bids_.empty() ){
+
+        return std::nullopt;
+
+    }
+
+    return bids_.begin()->first;
+
+}
+
+std::optional<double> OrderBook::best_ask() const{
+    if (asks_.empty() ){
+
+        return std::nullopt;
+
+    }
+
+    return asks_.begin()->first;
+}
+
+std::optional<double> OrderBook::spread() const{
+    auto bid = best_bid();
+    auto ask = best_ask();
+
+    if (bid && ask){
+
+        return ask.value() - bid.value();
+    }
+
+    return std::nullopt;
+}

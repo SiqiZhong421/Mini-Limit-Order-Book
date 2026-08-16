@@ -4,6 +4,7 @@
 #include <map>
 #include <deque>
 #include <functional>
+#include <optional>
 
 enum class Side{
     Buy,
@@ -39,4 +40,10 @@ public:
     bool cancel_order(int order_id);
     void print_orders() const;
     void print_trades() const;
+
+    const std::vector<Trade>& trades() const;
+
+    std::optional<double> best_bid() const;
+    std::optional<double> best_ask() const;
+    std::optional<double> spread() const;
 };

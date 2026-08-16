@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build Mini Order Book",
+            "label": "Build Demo",
             "type": "shell",
             "command": "cl.exe",
             "args": [
@@ -14,6 +14,31 @@
                 "${workspaceFolder}\\src\\main.cpp",
                 "${workspaceFolder}\\src\\order_book.cpp",
                 "/Fe:${workspaceFolder}\\order_book.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "Build Tests",
+            "type": "shell",
+            "command": "cl.exe",
+            "args": [
+                "/Zi",
+                "/EHsc",
+                "/nologo",
+                "/std:c++20",
+                "/I${workspaceFolder}\\include",
+                "${workspaceFolder}\\tests\\test_order_book.cpp",
+                "${workspaceFolder}\\src\\order_book.cpp",
+                "/Fe:${workspaceFolder}\\order_book_tests.exe"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"

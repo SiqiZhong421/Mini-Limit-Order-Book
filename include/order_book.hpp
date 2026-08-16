@@ -1,6 +1,9 @@
 #pragma once
 #include <vector>
 #include <unordered_set>
+#include <map>
+#include <deque>
+#include <functional>
 
 enum class Side{
     Buy,
@@ -14,14 +17,26 @@ struct Order{
     int quantity;
 };
 
+struct Trade{
+    int incoming_order_id;
+    int resting_order_id;
+    double price;
+    int quantity;
+};
+
 class OrderBook{
 private:
-    std::vector<Order> orders_;
+    std::vector<Trade> trades_;
     std::unordered_set<int> used_ids_;
-    bool can_match(const Order& incoming, const Order& resting) const;
+
+    std::map<double, std::deque<Order>, std::greater<double>> bids_;
+    std::map<double, std::deque<Order>> asks_;
+
+    void incoming_pushback(const Order& order);
 
 public:
     bool add_order(const Order& order);
-    void print_orders() const;
     bool cancel_order(int order_id);
+    void print_orders() const;
+    void print_trades() const;
 };
